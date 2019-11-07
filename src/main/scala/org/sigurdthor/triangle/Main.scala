@@ -9,7 +9,7 @@ object Main extends App {
 
   def run(args: List[String]) = flow.fold(_ => 1, _ => 0)
 
-  val flow =
+  val flow: ZIO[Console, Throwable, Unit] =
     for {
       triangle <- readTriangle
       node <- Task.succeed(calculatePath(triangle))

@@ -1,6 +1,7 @@
 package org.sigurdthor.triangle
 
-import org.sigurdthor.triangle.model.{Node, Row, Triangle}
+import org.sigurdthor.triangle.model.{Node, Triangle}
+import scala.annotation.tailrec
 
 trait TriangleCalculator {
   def calculatePath(triangle: Triangle): Node
@@ -9,19 +10,21 @@ trait TriangleCalculator {
 object CalculatorLive extends TriangleCalculator {
 
   override def calculatePath(triangle: Triangle): Node = {
+    val initial = List.fill(triangle.last.length + 1)(Node.empty)
+    traverse(triangle.reverse, initial).head
+  }
 
-    val initial = Array.fill(triangle.last.length + 1)(Node.empty)
-
-    val traverse: (Row, Array[Node]) => Array[Node] = (row, nodes) => {
-      row.zip(nodes.zip(nodes.tail)).map {
-        case (node, (left, right)) =>
+  @tailrec
+  private def traverse(subTriangle: Triangle, nodes: List[Node]): List[Node] = subTriangle match {
+    case Nil => nodes
+    case _ :: tail =>
+      val calculatedNodes = subTriangle.head.zip(nodes.zip(nodes.tail)).map {
+        case (value, (left, right)) =>
           val next = if (left.value < right.value) left else right
           Node(
-            node + next.value,
-            node :: next.path)
+            value + next.value,
+            value :: next.path)
       }
-    }
-
-    triangle.foldRight(initial)(traverse).head
+      traverse(tail, calculatedNodes)
   }
 }

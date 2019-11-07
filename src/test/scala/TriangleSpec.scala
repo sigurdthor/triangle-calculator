@@ -8,9 +8,9 @@ class TriangleSpec extends FeatureSpec with GivenWhenThen with Matchers {
 
       Given("Triangle ")
 
-      val triangle = Array(
-        Array(3),
-        Array(2, 1)
+      val triangle = List(
+        List(3),
+        List(2, 1)
       )
 
       When(s"Node is calculated")
@@ -27,11 +27,11 @@ class TriangleSpec extends FeatureSpec with GivenWhenThen with Matchers {
 
       Given("Triangle")
 
-      val triangle = Array(
-        Array(1),
-        Array(3, 2),
-        Array(4, 2, 1),
-        Array(4, 2, 1, 1)
+      val triangle = List(
+        List(1),
+        List(3, 2),
+        List(4, 2, 1),
+        List(4, 2, 1, 1)
       )
 
       When(s"Node is calculated")
@@ -43,7 +43,5 @@ class TriangleSpec extends FeatureSpec with GivenWhenThen with Matchers {
       node.value should be
       5
     }
-
-
   }
 }

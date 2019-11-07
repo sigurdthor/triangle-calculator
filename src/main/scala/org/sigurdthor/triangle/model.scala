@@ -4,8 +4,8 @@ object model {
 
   val EOF = "EOF"
 
-  type Row = Array[Int]
-  type Triangle = Array[Row]
+  type Row = List[Int]
+  type Triangle = List[Row]
   type Path = List[Int]
 
   case class Node(value: Int, path: Path)

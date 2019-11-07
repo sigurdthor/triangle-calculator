@@ -15,8 +15,8 @@ object effects {
     override def readTriangle: Task[Triangle] = IO.effect {
       stdin.getLines()
         .takeWhile(_ != EOF)
-        .map(line => line.split(" ").map(_.toInt))
-        .toArray
+        .map(line => line.split(" ").map(_.toInt).toList)
+        .toList
     }
   }
 
